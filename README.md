@@ -18,9 +18,10 @@ It is necessary install Python 2.7 and Postgresql to run this project.
 1. Install <a href="https://www.vagrantup.com/">Vagrant</a> and <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox.</a>
 2. **Start the virtual machine.** From your terminal, inside the project directory, run `vagrant up`. This will cause Vagrant to download the Linux operating system and install it. 
 3. **Log in the virtual machine.** From your terminal, inside the project directory, run `vagrant ssh`. 
-4. **Setup the database.** To load the database use the following command:
+4. **Unzip the database.** Unzip newsdata.zip inside the project directory.
+5. **Setup the database.** To load the database use the following command:
   <pre>psql -d news -f newsdata.sql;</pre>
-5. **Make views.** Run this queries on the terminal to make views.
+6. **Make views.** Run this queries on the terminal to make views.
 ```sql
 CREATE OR REPLACE VIEW articles_view AS
 SELECT title, count(*) AS views
@@ -65,7 +66,7 @@ FROM error_requests, total_requests
 WHERE error_requests.date=total_requests.date 
 ORDER BY date ASC;
 ```
-6. **Run the command.**
+7. **Run the command.**
   <pre>python newsdata.py</pre> 
 
 
