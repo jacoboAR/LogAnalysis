@@ -28,13 +28,13 @@ SELECT title, count(*) AS views
 FROM articles, log
 WHERE articles.slug=substring(log.path FROM 10)
 GROUP BY articles.title
-ORDER BY views DESC
+ORDER BY views DESC;
 ```
 ```sql
 CREATE OR REPLACE VIEW authors_articles AS
 SELECT authors.name, articles.title 
 FROM articles, authors
-WHERE articles.author=authors.id
+WHERE articles.author=authors.id;
 ```
 ```sql
 CREATE OR REPLACE VIEW most_pop_author AS
@@ -42,7 +42,7 @@ SELECT authors_articles.name, SUM(articles_views.views) AS sum
 FROM authors_articles, articles_views
 WHERE articles_views.title=authors_articles.title
 GROUP BY authors_articles.name
-ORDER BY sum DESC
+ORDER BY sum DESC;
 ```
 ```sql
 CREATE OR REPLACE VIEW error_requests AS 
