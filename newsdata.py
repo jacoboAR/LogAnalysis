@@ -3,15 +3,19 @@
 import psycopg2
 
 
-def connect():
+def connect(database_name="news"):
     """Connect to the database."""
-    return psycopg2.connect("dbname=news")
+    try:
+        db = psycopg2.connect("dbname={}".format(database_name))
+        c = db.cursor()
+        return db, c
+    except:
+        print("Error in conecting in news database")
 
 
 def get_three_articles():
     """Get the most popular three articles in the database"""
-    db = connect()
-    c = db.cursor()
+    db, c = connect()
     c.execute("SELECT * FROM articles_views LIMIT 3")
     articles = c.fetchall()
     db.close()
@@ -22,8 +26,7 @@ def get_three_articles():
 
 def most_popular_author():
     """Get the most popular article authors"""
-    db = connect()
-    c = db.cursor()
+    db, c = connect()
     c.execute("SELECT * FROM most_pop_author LIMIT 3")
     authors = c.fetchall()
     db.close()
@@ -34,8 +37,7 @@ def most_popular_author():
 
 def bad_request():
     """Get the days where error requests is more than 1%"""
-    db = connect()
-    c = db.cursor()
+    db, c = connect()
     c.execute("SELECT * FROM log_status WHERE error_rate > 1.00")
     error_requests = c.fetchall()
     db.close()
