@@ -23,7 +23,7 @@ It is necessary install Python 2.7 and Postgresql to run this project.
   <pre>psql -d news -f newsdata.sql;</pre>
 6. **Make views.** Run this queries on the terminal to make views.
 ```sql
-CREATE OR REPLACE VIEW articles_view AS
+CREATE OR REPLACE VIEW articles_views AS
 SELECT title, count(*) AS views
 FROM articles, log
 WHERE articles.slug=substring(log.path FROM 10)
